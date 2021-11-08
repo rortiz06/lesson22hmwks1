@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabrosas Empanadas</title>
+
+<style>
+
+    body{
+        background: linear-gradient(to right, purple 0%, Gold 100%);
+        color: white;
+
+    }
+
+    table,tr, td {
+        border: solid black 1px;
+        border-collapse: collapse;
+        padding: 3px;
+
+    }
+
+img {
+    width: 250px;
+    height: auto;
+
+
+}
+
+a:link,
+a:visited{
+    font-weight: blod;
+    text-decoration: none;
+    color: white;
+}
+
+
+
+</style>
+
+
+</head>
+
+<body>
+    <table>
+
+        <form name="theform">
+            <tr>
+                <td colspan="2">
+                    <h1>Sabrosas Empanadas</h1>
+                    <h3>Catering Invoice<br>
+                        Sabrosa emapnadas & more <br>
+                        Mcallen, Texas 78501 <br>
+                        (956) 123-4567</h3>
+
+                </td>
+                <td colspan="2" id="display"></td>
+            </tr>
+            <tr>
+                <td><strong>Menu Item</strong></td>
+                <td><strong>Unit Price</strong></td>
+                <td><strong>Quantity</strong></td>
+                <td><strong>Line Total</strong></td>
+            </tr>
+            <tr>
+                <td>Empanadas: Chicken</td>
+                <td>$2.98</td>
+                <td><input name="chickenFmQty" size="10"></td>
+                <td style="background-color: white; color: black" id="chickenFmOutput"></td>
+
+            </tr>
+            <tr>
+                <td>Empanadas: Rib</td>
+                <td>$2.98</td>
+                <td><input name="ribFmQty" size="10"></td>
+                <td style="background-color: white; color: black" id="ribFmOutput"></td>
+            </tr>
+            <tr>
+                <td>Empanadas: Cheese</td>
+                <td>$3.75</td>
+                <td><input name="cheeseFmQty" size="10"></td>
+                <td style="background-color: white; color: black" id="cheeseFmOutput"></td>
+            </tr>
+            <tr>
+                <td>Sides: Bean and rice</td>
+                <td>$1.98</td>
+                <td><input name="beansFmQty" size="10"></td>
+                <td style="background-color: white; color: black" id="beansFmOutput"></td>
+
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td><span style="float: right"> Tax:(8.25%)</span></td>
+                <td style="background-color: white ; color: black" id="taxFmOutput"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td><span style="float: right"> TOTAL: </span></td>
+                <td style="background-color: white ; color: black" id="TotalFmOutput"></td>
+            </tr>
+
+            <tr>
+                <td><input type="button" name="calc" value="Calculate" onclick="calculate();">
+                    <input type="button" name="clear" value="Clear" onclick="clearinfo();">
+                </td>
+                <td colspan="2">Total after Discount:(25%)</td>
+                <td style="background-color: white ; color: black" id="totalAfterDiscountFmOutput"></td>
+            </tr>
+        </form>
+
+    </table>
+    <script>
+        function calculate() {
+            const chickenUnitPrice = 2.98;
+            const ribUnitPrice = 2.98;
+            const cheeseUnitPrice = 3.75;
+            const beansUnitPrice = 1.98;
+
+            var chickenQty;
+            var ribQty;
+            var cheeseQty;
+            var beansQty;
+
+
+            var totalChicken;
+            var totalRib;
+            var totalCheese;
+            var totalBeans;
+
+            var tax;
+            var total;
+            var totalAfterDiscount;
+
+            chickenQty = parseInt(document.theform.chickenFmQty.value);
+            ribQty = parseInt(document.theform.ribFmQty.value);
+            cheeseQty = parseInt(document.theform.cheeseFmQty.value);
+            beansQty = parseInt(document.theform.beansFmQty.value);
+
+            totalChicken = parseFloat(chickenUnitPrice * chickenQty);
+            totalRib = parseFloat(ribUnitPrice * ribQty);
+            totalCheese = parseFloat(cheeseUnitPrice * cheeseQty);
+            totalBeans = parseFloat(beansUnitPrice * beansQty);
+
+
+            tax = parseFloat((totalChicken + totalRib + totalCheese + totalBeans) * .0825);
+            total = parseFloat(totalChicken + totalRib + totalCheese + totalBeans + tax);
+            totalAfterDiscount = parseFloat(total - (total * .25));
+
+
+            document.getElementById("chickenFmOutput").innerHTML = "$ " + totalChicken.toFixed(2);
+            document.getElementById("ribFmOutput").innerHTML = "$ " + totalRib.toFixed(2);
+            document.getElementById("cheeseFmOutput").innerHTML = "$ " + totalCheese.toFixed(2);
+            document.getElementById("beansFmOutput").innerHTML = "$ " + totalBeans.toFixed(2);
+
+
+            document.getElementById("taxFmOutput").innerHTML = "$ " + tax.toFixed(2);
+            document.getElementById("TotalFmOutput").innerHTML = "$ " + total.toFixed(2);
+            document.getElementById("totalAfterDiscountFmOutput").innerHTML = "$ " + totalAfterDiscount.toFixed(2);
+
+        }
+
+
+
+        function clearinfo() {
+            document.theform.chickenFmQty.value = " ";
+            document.theform.ribFmQty.value = " ";
+            document.theform.cheeseFmQty.value = " ";
+            document.theform.beansFmQty.value = " ";
+
+            document.getElementById("chickenFmOutput").innerHTML = " ";
+            document.getElementById("ribFmOutput").innerHTML = " ";
+            document.getElementById("cheeseFmOutput").innerHTML = " ";
+            document.getElementById("beansFmOutput").innerHTML = " ";
+
+            document.getElementById("taxFmOutput").innerHTML = " ";
+            document.getElementById("TotalFmOutput").innerHTML = " ";
+            document.getElementById("totalAfterDiscountFmOutput").innerHTML = " ";
+
+
+            document.theform.chickenFmQty.focus();
+
+        }
+
+        function getImages(){
+            document.theform.chickenFmQty.focus();
+
+            images = new Array(5);
+
+            display = document.getElementById("display")
+
+
+            images[0] = "<img src='pan1.jpg' alt='image of empanadas 1'>";
+            images[1] = "<img src='pan2.jpg' alt='image of empanadas 2'>";
+            images[2] = "<img src='pan3.jpg' alt='image of empanadas 3'>";
+            images[3] = "<img src='pan4.jpg' alt='image of empanadas 4'>";
+            images[4] = "<img src='pan5.jpg' alt='image of empanadas 5'>";
+
+
+            x= Math.floor(Math.random()* images.length)
+
+
+            display.innerHTML = images[x];
+
+
+        }
+        getImages();
+
+    </script>
+
+
+
+</body>
+
+<a href="http://csnet.southtexascollege.edu/localuser/rortiz84/">Go Back to HomePage</a><br>
+  <p style="color: white;"> Roy Ortiz</p><br>
+</html>
